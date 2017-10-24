@@ -21,20 +21,17 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import time
-import os
-import socket
-import struct
-import re
 import logging
-from shadowsocks import common
-from shadowsocks import lru_cache
-from shadowsocks import eventloop
-import server_pool
+import socket
+import time
+
 import Config
 
-class ServerMgr(object):
+import server_pool
+from shadowsocks import eventloop
 
+
+class ServerMgr(object):
     def __init__(self):
         self._loop = None
         self._request_id = 1
@@ -59,7 +56,7 @@ class ServerMgr(object):
 
     def _handle_data(self, sock):
         data, addr = sock.recvfrom(128)
-        #manage pwd:port:passwd:action
+        # manage pwd:port:passwd:action
         args = data.split(':')
         if len(args) < 4:
             return
@@ -94,6 +91,7 @@ class ServerMgr(object):
 
 def test():
     pass
+
 
 if __name__ == '__main__':
     test()
